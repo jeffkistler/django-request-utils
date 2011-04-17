@@ -1,0 +1,6 @@
+====================
+Django Request Utils
+====================
+
+Django Request Utils provides helpers for working with request objects
+in Django templates.
