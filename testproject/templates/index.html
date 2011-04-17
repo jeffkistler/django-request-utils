@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Request Utils</title>
+  </head>
+  <body>
+    {% load request_utils %}
+    {% clone_query_dict request.GET as "clone" %}
+    <p>Cloned: {{ clone.urlencode }}</p>
+    {% query_dict as "new" %}
+    <p>Empty: {{ new.urlencode }}</p>
+    {% update_query_dict new request.GET %}
+    <p>Empty updated with request.GET: {{ new.urlencode }}</p>
+    {% delete_key new "useless" %}
+    <p>Parameter "useless" deleted: {{ new.urlencode }}</p>
+    {% replace_key new "page" "1" %}
+    <p>Parameter "page" replaced with "1": {{ new.urlencode }}</p>
+    {% append_key new "page" "2" %}
+    <p>"2" appended to parameter "page": {{ new.urlencode }}</p>
+    {% qualified_url "/foo" as "qualified" %}
+    <p>Qualified URL: {{ qualified }}</p>
+    {% qualified_url request.path as "qualified" %}
+    <p>Current Qualified URL: {{ qualified }}</p>
+    {% current_location as "current" %}
+    <p>Current path + querystring: {{ current }}</p>
+    {% qualified_url current as "current_qualified" %}
+    <p>Current qualified URL: {{ current_qualified }}</p>
+  </body>
+</html>
